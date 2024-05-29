@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">List of Customer</h4>
+                <div class="d-flex justify-content-sm-end">
+                        <button type="button" class="btn btn-info add-btn me-2" id="create-btn" (click)="navigateToPinPage()">
+                            <i class="ri-add-line align-bottom me-1"></i> View pin
+                        </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto"></div>
+                        <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <div>
+                                    <button type="button" class="btn btn-info add-btn me-2" id="create-btn" (click)="deleteModal.show()">
+                                        <i class="ri-add-line align-bottom me-1"></i> Add Customer
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-primary">
+                                        <i class="ph-cloud-arrow-up align-middle me-1"></i> Add Pin
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="customerTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="sort" listsortable="customer_name">Name</th>
+                                    <th class="sort" listsortable="customer_name">Email</th>
+                                    <th class="sort" listsortable="email">Region</th>
+                                    <th class="sort" listsortable="email">Country</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                                <tr *ngFor="let data of customerdata">
+                                    <td class="customer_name">{{ data.name }}</td>
+                                    <td class="customer_name">{{ data.email }}</td>
+                                    <td class="customer_name">{{ data.region }}</td>
+                                    <td class="customer_name">{{ data.country }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteRecordModal" class="modal fade zoomIn" bsModal #deleteModal="bs-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Add Customer </h5>
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <form [formGroup]="MessageFormData">
+                    <div class="mb-3">
+                        <label for="course-category-input" class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Title" required />
+                    </div>
+               
+                    <div class="mb-3">
+                        <label for="customername-field" class="form-label">Email</label>
+                        <input type="text" class="form-control" formControlName="email" placeholder="Enter Email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="country-field" class="form-label">Region</label>
+                        <select class="form-select" formControlName="region" id="country-field" required>
+                          <option value="">Select Region</option>
+                          <option *ngFor="let country of countries" [value]="country.code">{{ country.region }}</option>
+                        </select>
+                      </div>
+                    <div class="mb-3">
+                        <label for="country-field" class="form-label">Country</label>
+                        <select class="form-select" formControlName="country" id="country-field" required>
+                          <option value="">Select Country</option>
+                          <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                        </select>
+                      </div>
+                    
+                    <button type="button" class="btn btn-primary" (click)="saveCategory()">Save</button>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
